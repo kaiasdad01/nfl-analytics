@@ -43,12 +43,11 @@ Should be the same sources as prediction module.
 - ***Player Summary*** - top passers, top rushers, top QBs by QB rating, etc. 
 
 ## Tech Stack
-- Airflow or Dagster for scheduling & orchestration
-- dbt for cleaning & transformations
-- GCP or Delta Lake / Iceberg for raw data storage
-- Snowflake or GCP for 
+- Dagster
+- dbt 
+- GCP | BigQuery, Cloud Scheduler
 - scikit-learn, tensorflow, or pytorch for ML dev
-- Looker for Dashboarding & Analytics Platform
+- ?? for Data Viz / BI / Interface Layer
 
 
 

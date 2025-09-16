@@ -1,0 +1,10 @@
+[32m2025-09-15 17:07:18 -0600[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 9a911160-99d9-4127-ad9d-16ff23b288e7 - 92281 - LOGS_CAPTURED - Started capturing logs in process (pid: 92281).
+[32m2025-09-15 17:07:18 -0600[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 9a911160-99d9-4127-ad9d-16ff23b288e7 - 92281 - nfl_games - STEP_START - Started execution of step "nfl_games".
+[32m2025-09-15 17:07:18 -0600[0m - dagster - [34mINFO[0m - __ASSET_JOB - 9a911160-99d9-4127-ad9d-16ff23b288e7 - nfl_games - Loading NFL games data for seasons: [2020, 2021, 2022, 2023, 2024]
+[32m2025-09-15 17:07:19 -0600[0m - dagster - [34mINFO[0m - __ASSET_JOB - 9a911160-99d9-4127-ad9d-16ff23b288e7 - nfl_games - Loaded 1408 games
+[32m2025-09-15 17:07:24 -0600[0m - dagster - [34mINFO[0m - __ASSET_JOB - 9a911160-99d9-4127-ad9d-16ff23b288e7 - nfl_games - Stored 1408 records in nfl-analytics-472221.nfl_data.games
+[32m2025-09-15 17:07:24 -0600[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 9a911160-99d9-4127-ad9d-16ff23b288e7 - 92281 - nfl_games - STEP_OUTPUT - Yielded output "result" of type "DataFrame". (Type check passed).
+[32m2025-09-15 17:07:24 -0600[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 9a911160-99d9-4127-ad9d-16ff23b288e7 - nfl_games - Writing file at: /Users/matthewdwyer/Documents/nfl_v2/.tmp_dagster_home_2c3xy7s4/storage/nfl_games using PickledObjectFilesystemIOManager...
+[32m2025-09-15 17:07:24 -0600[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 9a911160-99d9-4127-ad9d-16ff23b288e7 - 92281 - nfl_games - ASSET_MATERIALIZATION - Materialized value nfl_games.
+[32m2025-09-15 17:07:24 -0600[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 9a911160-99d9-4127-ad9d-16ff23b288e7 - 92281 - nfl_games - HANDLED_OUTPUT - Handled output "result" using IO manager "io_manager"
+[32m2025-09-15 17:07:24 -0600[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 9a911160-99d9-4127-ad9d-16ff23b288e7 - 92281 - nfl_games - STEP_SUCCESS - Finished execution of step "nfl_games" in 5.6s.

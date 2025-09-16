@@ -1,0 +1,1 @@
+"""Configuration module for NFL analytics pipeline."""

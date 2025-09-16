@@ -6,16 +6,20 @@ with plays as (
     , season
     , week
     , season_type
-    , offense_team                                   as team
+    , cast(posteam as string) as team
     , yards_gained
-    , is_interception
-    , is_fumble_lost
-    , is_first_down
-    , third_down_converted
-    , third_down_failed
+    , (coalesce(safe_cast(interception  as int64),0) > 0) as is_interception
+    , (coalesce(safe_cast(fumble_lost   as int64),0) > 0) as is_fumble_lost
+    , (coalesce(safe_cast(first_down    as int64),0) > 0) as is_first_down
+    , (coalesce(safe_cast(third_down_converted as int64),0) > 0) as third_down_converted
+    , (coalesce(safe_cast(third_down_failed    as int64),0) > 0) as third_down_failed
     , epa
-    , drive_time_of_possession_seconds
-    , in_red_zone
+    , case
+        when drive_time_of_possession is null then null
+        else coalesce(safe_cast(split(drive_time_of_possession, ':')[safe_offset(0)] as int64), 0) * 60
+           +       safe_cast(split(drive_time_of_possession, ':')[safe_offset(1)] as int64)
+      end as drive_time_of_possession_seconds
+    , (yardline_100 is not null and yardline_100 <= 20) as in_red_zone
   from {{ ref('stg_pbp') }}
 )
 

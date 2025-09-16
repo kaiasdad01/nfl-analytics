@@ -1,0 +1,10 @@
+[32m2025-09-15 17:09:05 -0600[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - e277a0c7-3258-467a-a238-2f60564bd94e - 93835 - LOGS_CAPTURED - Started capturing logs in process (pid: 93835).
+[32m2025-09-15 17:09:05 -0600[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - e277a0c7-3258-467a-a238-2f60564bd94e - 93835 - nfl_player_stats - STEP_START - Started execution of step "nfl_player_stats".
+[32m2025-09-15 17:09:05 -0600[0m - dagster - [34mINFO[0m - __ASSET_JOB - e277a0c7-3258-467a-a238-2f60564bd94e - nfl_player_stats - Loading NFL player stats for seasons: [2020, 2021, 2022, 2023, 2024]
+[32m2025-09-15 17:09:08 -0600[0m - dagster - [34mINFO[0m - __ASSET_JOB - e277a0c7-3258-467a-a238-2f60564bd94e - nfl_player_stats - Loaded 28026 player stat records
+[32m2025-09-15 17:09:12 -0600[0m - dagster - [34mINFO[0m - __ASSET_JOB - e277a0c7-3258-467a-a238-2f60564bd94e - nfl_player_stats - Stored 28026 records in nfl-analytics-472221.nfl_data.player_stats
+[32m2025-09-15 17:09:12 -0600[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - e277a0c7-3258-467a-a238-2f60564bd94e - 93835 - nfl_player_stats - STEP_OUTPUT - Yielded output "result" of type "DataFrame". (Type check passed).
+[32m2025-09-15 17:09:12 -0600[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - e277a0c7-3258-467a-a238-2f60564bd94e - nfl_player_stats - Writing file at: /Users/matthewdwyer/Documents/nfl_v2/.tmp_dagster_home_2c3xy7s4/storage/nfl_player_stats using PickledObjectFilesystemIOManager...
+[32m2025-09-15 17:09:12 -0600[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - e277a0c7-3258-467a-a238-2f60564bd94e - 93835 - nfl_player_stats - ASSET_MATERIALIZATION - Materialized value nfl_player_stats.
+[32m2025-09-15 17:09:12 -0600[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - e277a0c7-3258-467a-a238-2f60564bd94e - 93835 - nfl_player_stats - HANDLED_OUTPUT - Handled output "result" using IO manager "io_manager"
+[32m2025-09-15 17:09:12 -0600[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - e277a0c7-3258-467a-a238-2f60564bd94e - 93835 - nfl_player_stats - STEP_SUCCESS - Finished execution of step "nfl_player_stats" in 7.36s.

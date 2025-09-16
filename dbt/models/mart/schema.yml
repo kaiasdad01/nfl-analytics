@@ -145,3 +145,40 @@ models:
         description: "Total games played between teams"
         tests:
           - not_null
+
+  - name: game_labels
+    description: "Supervised labels for game outcome and game scores"
+    columns:
+      - name: game_id
+        description: "Unique identifier for each game"
+        tests:
+          - not_null
+          - unique
+      - name: season
+        tests: [not_null]
+      - name: week
+        tests: [not_null]
+      - name: home_team
+        tests: [not_null]
+      - name: away_team
+        tests: [not_null]
+      - name: home_score
+        tests: [not_null]
+      - name: away_score
+        tests: [not_null]
+
+  - name: game_training_dataset
+    description: "Pre-game home/away features (week-1 and rolling) joined to labels; 1 row per game_id"
+    columns:
+      - name: game_id
+        tests: [not_null, unique]
+      - name: season
+        tests: [not_null]
+      - name: week
+        tests: [not_null]
+      - name: home_team
+        tests: [not_null]
+      - name: away_team
+        tests: [not_null]
+      - name: home_win
+        description: "Binary outcome; ties may be null"

@@ -5,10 +5,10 @@ with ngs_agg as (
       player_id
     , season
     , stat_type
-    , avg(avg_time_to_throw)       as avg_time_to_throw
-    , avg(avg_completed_air_yards) as avg_completed_air_yards
-    , avg(avg_separation)          as avg_sep
-    , avg(rush_yoe_per_att)        as rush_yoe_per_att
+    , avg(avg_time_to_throw)              as avg_time_to_throw
+    , avg(avg_completed_air_yards)        as avg_completed_air_yards
+    , avg(avg_separation)                 as avg_sep
+    , avg(rush_yards_over_expected_per_att) as rush_yoe_per_att
   from {{ ref('stg_ngs') }}
   group by 1,2,3
 )
