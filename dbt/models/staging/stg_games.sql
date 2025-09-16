@@ -4,7 +4,7 @@ with source_data as (
 
 cleaned_games as (
     select
-        , game_id
+          game_id
         , season 
         , week 
         , game_type 
@@ -12,16 +12,16 @@ cleaned_games as (
         , away_team 
         , home_score
         , away_score
-        , game_date
+        , gameday
 
-        case 
+        ,case 
             when home_score > away_score then home_team
             when home_score < away_score then away_team
             else 'TIE'
         end as winning_team
 
-        abs(home_score - away_score) as point_differential
-        home_score + away_score as total_points
+        ,abs(home_score - away_score) as point_differential
+        ,home_score + away_score as total_points
     from source_data
 )
 

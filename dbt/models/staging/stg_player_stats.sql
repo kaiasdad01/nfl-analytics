@@ -1,13 +1,13 @@
 with source_data as (
-    select * from {{ source('nfl_data', 'games') }}
+    select * from {{ source('nfl_data', 'player_stats') }}
 ),
 
 cleaned_stats as (
     select 
-        , player_id
+          player_id
         , player_name
         , position
-        , team
+        , recent_team
         , season 
         , week 
 
@@ -20,12 +20,12 @@ cleaned_stats as (
         
         -- FANTASY POINTS !!!
 
-        (coalesce(passing_yards, 0) * {{ var('passing_yard_points') }}) +
-        (coalesce(rushing_yards, 0) * {{ var('rushing_yard_points') }}) +
-        (coalesce(receiving_yards, 0) * {{ var('receiving_yard_points') }}) +
-        (coalesce(passing_tds, 0) * {{ var('passing_td_points') }}) +
-        (coalesce(rushing_tds, 0) * {{ var('rushing_td_points') }}) +
-        (coalesce(receiving_tds, 0) * {{ var('receiving_td_points') }}) as fantasy_points
+        , (coalesce(passing_yards, 0) * {{ var('passing_yard_points') }}) +
+          (coalesce(rushing_yards, 0) * {{ var('rushing_yard_points') }}) +
+          (coalesce(receiving_yards, 0) * {{ var('receiving_yard_points') }}) +
+          (coalesce(passing_tds, 0) * {{ var('passing_td_points') }}) +
+          (coalesce(rushing_tds, 0) * {{ var('rushing_td_points') }}) +
+          (coalesce(receiving_tds, 0) * {{ var('receiving_td_points') }}) as fantasy_points
 
     from source_data
 )

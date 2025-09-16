@@ -18,5 +18,20 @@ sources:
           - name: player_id
             description: "Unique player identifier"
             tests:
-              - unique
               - not_null
+      - name: pbp_data
+        description: "Play by play data"
+        columns:
+          - name: player_id
+            description: "Unique player identifier"
+            tests:
+              - not_null
+      - name: rosters
+        description: "NFL rosters by season"
+        columns:
+          - name: player_id
+            description: "Unique player identifier"
+            tests:
+              - not_null
+      - name: ngs_data
+        description: "AWS Next Gen Stats data"

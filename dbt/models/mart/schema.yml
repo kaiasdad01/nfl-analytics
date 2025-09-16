@@ -1,0 +1,147 @@
+version: 2
+
+models:
+  - name: stg_games
+    description: "Cleaned and transformed game data"
+    columns:
+      - name: game_id
+        description: "Unique identifier for each game"
+        tests:
+          - not_null
+          - unique
+      - name: winning_team
+        description: "Team that won the game, or 'TIE'"
+        tests:
+          - not_null
+      - name: point_differential
+        description: "Absolute difference in scores"
+        tests:
+          - not_null
+      - name: total_points
+        description: "Combined points scored by both teams"
+        tests:
+          - not_null
+
+  - name: stg_player_stats
+    description: "Cleaned and transformed player statistics"
+    columns:
+      - name: player_id
+        description: "Unique identifier for each player"
+        tests:
+          - not_null
+      - name: fantasy_points
+        description: "Calculated fantasy points based on scoring system"
+        tests:
+          - not_null
+
+  - name: player_performance_season
+    description: "Season-level player performance metrics and fantasy scoring"
+    columns:
+      - name: player_id
+        description: "Unique identifier for each player"
+        tests:
+          - not_null
+      - name: season
+        description: "NFL season year"
+        tests:
+          - not_null
+      - name: total_fantasy_points
+        description: "Total fantasy points for the season"
+        tests:
+          - not_null
+      - name: games_played
+        description: "Number of games played in season"
+        tests:
+          - not_null
+
+  - name: player_performance_weekly
+    description: "Weekly-level player performance with rolling averages and trends"
+    columns:
+      - name: player_id
+        description: "Unique identifier for each player"
+        tests:
+          - not_null
+      - name: season
+        description: "NFL season year"
+        tests:
+          - not_null
+      - name: week
+        description: "Week number in season"
+        tests:
+          - not_null
+      - name: fantasy_points
+        description: "Fantasy points scored in this game"
+        tests:
+          - not_null
+
+  - name: player_matchups
+    description: "Head-to-head player performance analysis and matchup insights"
+    columns:
+      - name: player_id
+        description: "Unique identifier for each player"
+        tests:
+          - not_null
+      - name: season
+        description: "NFL season year"
+        tests:
+          - not_null
+
+  - name: team_performance_season
+    description: "Season-level team performance metrics and standings"
+    columns:
+      - name: team
+        description: "Team name"
+        tests:
+          - not_null
+      - name: season
+        description: "NFL season year"
+        tests:
+          - not_null
+      - name: win_percentage
+        description: "Team win percentage for the season"
+        tests:
+          - not_null
+      - name: games_played
+        description: "Number of games played in season"
+        tests:
+          - not_null
+
+  - name: team_performance_weekly
+    description: "Weekly-level team performance with rolling averages and momentum"
+    columns:
+      - name: team
+        description: "Team name"
+        tests:
+          - not_null
+      - name: season
+        description: "NFL season year"
+        tests:
+          - not_null
+      - name: week
+        description: "Week number in season"
+        tests:
+          - not_null
+      - name: opponent
+        description: "Team they played against"
+        tests:
+          - not_null
+
+  - name: team_matchups
+    description: "Head-to-head team matchup analysis and historical performance"
+    columns:
+      - name: team1
+        description: "Home team in matchup"
+        tests:
+          - not_null
+      - name: team2
+        description: "Away team in matchup"
+        tests:
+          - not_null
+      - name: season
+        description: "NFL season year"
+        tests:
+          - not_null
+      - name: total_games
+        description: "Total games played between teams"
+        tests:
+          - not_null

@@ -7,7 +7,7 @@ nfl_analytics:
       project: "nfl-analytics-472221"
       dataset: "nfl_data"
       location: "US"
-      keyfile: "credentials.json"
+      keyfile: "../credentials.json"
       threads: 4
       timeout_seconds: 300
       priority: interactive
