@@ -1,0 +1,33 @@
+name: 'nfl_analytics'
+version: '1.0.0'
+config-version: 2
+
+profile: 'nfl_analytics'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - target
+  - dbt_modules
+
+models:
+  nfl_analytics:
+    +materialized: table
+    staging: 
+      +materialized: view
+    mart:
+      +materialized: table
+
+vars:
+  passing_yard_points: 0.04
+  passing_td_points: 4
+  rushing_yard_points: 0.1
+  rushing_td_points: 6
+  receiving_yard_points: 0.1
+  receiving_td_points: 6

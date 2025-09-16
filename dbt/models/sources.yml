@@ -1,0 +1,22 @@
+version: 2
+
+sources:
+  - name: nfl_data  # Change this from 'raw_nfl'
+    description: "Raw NFL data from APIs"
+    tables:
+      - name: games
+        description: "Raw NFL games data"
+        columns:
+          - name: game_id
+            description: "Unique game identifier"
+            tests:
+              - unique
+              - not_null
+      - name: player_stats
+        description: "Raw NFL player statistics"
+        columns:
+          - name: player_id
+            description: "Unique player identifier"
+            tests:
+              - unique
+              - not_null

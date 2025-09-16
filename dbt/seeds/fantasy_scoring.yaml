@@ -1,0 +1,11 @@
+version: 2
+
+seeds:
+  - name: fantasy_scoring
+    config:
+      schema: nfl_data
+    columns:
+      - name: stat_type
+        description: "Type of stat"
+      - name: points_per_unit
+        description: "Points per unit for each stat"
