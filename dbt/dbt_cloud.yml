@@ -1,0 +1,15 @@
+version: "1"
+context:
+  active-host: "js886.us1.dbt.com"
+  active-project: "70471823452545"
+projects:
+  - project-name: "Analytics"
+    project-id: "70471823452545"
+    account-name: "University of Colorado Boulder"
+    account-id: "70471823446892"
+    account-host: "js886.us1.dbt.com"
+    token-name: "cloud-cli-4ea2"
+    token-value: "dbtu_se6C8jsE0k6Z-N7wZ78-Jr0cU2G0U_Z1QoeeCxhJLkqeCnDhAs"
+
+
+

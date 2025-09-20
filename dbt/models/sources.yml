@@ -22,8 +22,8 @@ sources:
       - name: pbp_data
         description: "Play by play data"
         columns:
-          - name: player_id
-            description: "Unique player identifier"
+          - name: play_id
+            description: "Unique play identifier"
             tests:
               - not_null
       - name: rosters
@@ -35,3 +35,23 @@ sources:
               - not_null
       - name: ngs_data
         description: "AWS Next Gen Stats data"
+      - name: schedule_2025
+        description: "2025 NFL schedule data"
+        columns:
+          - name: game_id
+            tests: [unique, not_null]
+      - name: pbp_data_2025
+        description: "2025 live play-by-play data"
+        columns:
+          - name: game_id
+            tests: [not_null]
+      - name: player_stats_2025
+        description: "2025 live player statistics"
+        columns:
+          - name: player_id
+            tests: [not_null]
+      - name: rosters_2025
+        description: "2025 NFL rosters"
+        columns:
+          - name: player_id
+            tests: [not_null]

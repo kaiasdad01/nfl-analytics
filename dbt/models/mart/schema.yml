@@ -1,184 +1,155 @@
 version: 2
 
 models:
-  - name: stg_games
-    description: "Cleaned and transformed game data"
+  # ============================================
+  # CORE ML MODELS
+  # ============================================
+
+  - name: team_performance
+    description: "Comprehensive team performance model with rolling averages, trends, and efficiency metrics"
     columns:
+      - name: team
+        description: "Team abbreviation (e.g., KC, BUF)"
+        tests:
+          - not_null
+
+      - name: season
+        description: "NFL season year"
+        tests:
+          - not_null
+
+      - name: week
+        description: "Week number in season"
+        tests:
+          - not_null
+
       - name: game_id
         description: "Unique identifier for each game"
         tests:
           - not_null
-          - unique
-      - name: winning_team
-        description: "Team that won the game, or 'TIE'"
-        tests:
-          - not_null
-      - name: point_differential
-        description: "Absolute difference in scores"
-        tests:
-          - not_null
-      - name: total_points
-        description: "Combined points scored by both teams"
+
+      - name: total_epa
+        description: "Expected Points Added for the game"
         tests:
           - not_null
 
-  - name: stg_player_stats
-    description: "Cleaned and transformed player statistics"
-    columns:
-      - name: player_id
-        description: "Unique identifier for each player"
+      - name: recent_form
+        description: "Team form indicator"
         tests:
-          - not_null
-      - name: fantasy_points
-        description: "Calculated fantasy points based on scoring system"
-        tests:
-          - not_null
+          - accepted_values:
+              arguments:
+                values: ['hot', 'cold', 'average']
 
-  - name: player_performance_season
-    description: "Season-level player performance metrics and fantasy scoring"
+  - name: team_game_features
+    description: "Base team game-level statistics from play-by-play data"
     columns:
-      - name: player_id
-        description: "Unique identifier for each player"
-        tests:
-          - not_null
-      - name: season
-        description: "NFL season year"
-        tests:
-          - not_null
-      - name: total_fantasy_points
-        description: "Total fantasy points for the season"
-        tests:
-          - not_null
-      - name: games_played
-        description: "Number of games played in season"
-        tests:
-          - not_null
-
-  - name: player_performance_weekly
-    description: "Weekly-level player performance with rolling averages and trends"
-    columns:
-      - name: player_id
-        description: "Unique identifier for each player"
-        tests:
-          - not_null
-      - name: season
-        description: "NFL season year"
-        tests:
-          - not_null
-      - name: week
-        description: "Week number in season"
-        tests:
-          - not_null
-      - name: fantasy_points
-        description: "Fantasy points scored in this game"
-        tests:
-          - not_null
-
-  - name: player_matchups
-    description: "Head-to-head player performance analysis and matchup insights"
-    columns:
-      - name: player_id
-        description: "Unique identifier for each player"
-        tests:
-          - not_null
-      - name: season
-        description: "NFL season year"
-        tests:
-          - not_null
-
-  - name: team_performance_season
-    description: "Season-level team performance metrics and standings"
-    columns:
+      - name: game_id
+        tests: [not_null]
       - name: team
-        description: "Team name"
-        tests:
-          - not_null
+        tests: [not_null]
       - name: season
-        description: "NFL season year"
-        tests:
-          - not_null
-      - name: win_percentage
-        description: "Team win percentage for the season"
-        tests:
-          - not_null
-      - name: games_played
-        description: "Number of games played in season"
-        tests:
-          - not_null
-
-  - name: team_performance_weekly
-    description: "Weekly-level team performance with rolling averages and momentum"
-    columns:
-      - name: team
-        description: "Team name"
-        tests:
-          - not_null
-      - name: season
-        description: "NFL season year"
-        tests:
-          - not_null
+        tests: [not_null]
       - name: week
-        description: "Week number in season"
-        tests:
-          - not_null
-      - name: opponent
-        description: "Team they played against"
-        tests:
-          - not_null
-
-  - name: team_matchups
-    description: "Head-to-head team matchup analysis and historical performance"
-    columns:
-      - name: team1
-        description: "Home team in matchup"
-        tests:
-          - not_null
-      - name: team2
-        description: "Away team in matchup"
-        tests:
-          - not_null
-      - name: season
-        description: "NFL season year"
-        tests:
-          - not_null
-      - name: total_games
-        description: "Total games played between teams"
-        tests:
-          - not_null
+        tests: [not_null]
+      - name: total_yards
+        tests: [not_null]
+      - name: total_epa
+        tests: [not_null]
+      - name: total_turnovers
+        tests: [not_null]
 
   - name: game_labels
-    description: "Supervised labels for game outcome and game scores"
+    description: "Game results and labels for ML training"
     columns:
       - name: game_id
         description: "Unique identifier for each game"
         tests:
           - not_null
           - unique
+
       - name: season
         tests: [not_null]
+
       - name: week
         tests: [not_null]
+
       - name: home_team
         tests: [not_null]
+
       - name: away_team
         tests: [not_null]
+
       - name: home_score
+        description: "Home team final score"
         tests: [not_null]
+
       - name: away_score
+        description: "Away team final score"
         tests: [not_null]
 
   - name: game_training_dataset
-    description: "Pre-game home/away features (week-1 and rolling) joined to labels; 1 row per game_id"
+    description: "ML-ready dataset with team features and game outcomes"
     columns:
       - name: game_id
         tests: [not_null, unique]
+
+      - name: home_team
+        tests: [not_null]
+
+      - name: away_team
+        tests: [not_null]
+
+      - name: home_win
+        description: "1 if home team won, 0 if away team won, null for ties"
+
+      - name: home_avg_epa_l3
+        description: "Home team 3-game rolling average EPA"
+
+      - name: away_avg_epa_l3
+        description: "Away team 3-game rolling average EPA"
+
+  # ============================================
+  # ANALYTICS MODELS
+  # ============================================
+
+  - name: team_dashboard
+    description: "Analytics-friendly team performance view for BI tools"
+    columns:
+      - name: team
+        tests: [not_null]
       - name: season
         tests: [not_null]
       - name: week
         tests: [not_null]
-      - name: home_team
+      - name: performance_quartile
+        description: "Performance quartile ranking"
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Top 25%', 'Top 50%', 'Bottom 50%', 'Bottom 25%']
+      - name: season_phase
+        description: "Phase of NFL season"
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Early Season', 'Mid Season', 'Late Season']
+
+  # ============================================
+  # PLAYER MODELS
+  # ============================================
+
+  - name: player_season
+    description: "Basic player season-level statistics"
+    columns:
+      - name: player_id
         tests: [not_null]
-      - name: away_team
+      - name: season
         tests: [not_null]
-      - name: home_win
-        description: "Binary outcome; ties may be null"
+
+  - name: player_season_ngs
+    description: "Player season stats enhanced with Next Gen Stats data"
+    columns:
+      - name: player_id
+        tests: [not_null]
+      - name: season
+        tests: [not_null]

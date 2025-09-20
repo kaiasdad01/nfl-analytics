@@ -8,6 +8,6 @@ nfl_analytics:
       dataset: "nfl_data"
       location: "US"
       keyfile: "../credentials.json"
-      threads: 16
+      threads: 4
       timeout_seconds: 300
       priority: interactive

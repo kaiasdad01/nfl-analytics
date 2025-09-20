@@ -3,7 +3,7 @@ Config settings for analytics pipeline
 """
 
 # Data Settings
-SEASONS = [2020, 2021, 2022, 2023, 2024]
+SEASONS = [2020, 2021, 2022, 2023, 2024, 2025]
 
 # BigQuery Settings
 BIGQUERY_PROJECT = "nfl-analytics-472221"
